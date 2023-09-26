@@ -63,7 +63,8 @@ export type ModelOptions =
   | 'code-llama-34b-instruct'
   | 'claude-2'
   | 'claude-instant'
-  | 'palm';
+  | 'falcon-180b-chat';
+
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {
     promptTokens: number;

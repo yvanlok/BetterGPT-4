@@ -29,7 +29,7 @@ export const modelOptions: ModelOptions[] = [
   'gpt-4-32k-0314',
   'claude-2',
   'claude-instant',
-  'palm',
+  'falcon-180b-chat',
 ];
 
 export const defaultModel = 'gpt-3.5-turbo-16k';
@@ -48,7 +48,7 @@ export const modelMaxToken = {
   'code-llama-34b-instruct': 8192,
   'claude-2': 100000,
   'claude-instant': 10000,
-  'palm': 2048,
+  'falcon-180b-chat': 2048,
 };
 
 export const modelCost = {};
