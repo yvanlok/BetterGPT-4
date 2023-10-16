@@ -51,19 +51,16 @@ export interface Folder {
 
 export type ModelOptions =
   | 'gpt-4'
-  | 'gpt-4-0314'
   | 'gpt-4-32k'
-  | 'gpt-4-32k-0314'
   | 'gpt-3.5-turbo'
-  | 'gpt-3.5-turbo-0301'
   | 'gpt-3.5-turbo-16k'
-  | 'gpt-3.5-turbo-16k-0301'
   | 'llama-2-70b-chat'
   | 'oasst-sft-6-llama-30b'
   | 'code-llama-34b-instruct'
   | 'claude-2'
   | 'claude-instant'
-  | 'falcon-180b-chat';
+  | 'falcon-180b-chat'
+  | 'zephyr-7b-alpha';
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {
