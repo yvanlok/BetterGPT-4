@@ -55,12 +55,13 @@ export type ModelOptions =
   | 'gpt-3.5-turbo'
   | 'gpt-3.5-turbo-16k'
   | 'llama-2-70b-chat'
-  | 'oasst-sft-6-llama-30b'
-  | 'code-llama-34b-instruct'
+  | 'llama-2-13b-chat'
+  | 'llama-2-7b-chat'
+  | 'code-llama-34b'
   | 'claude-2'
   | 'claude-instant'
   | 'falcon-180b-chat'
-  | 'zephyr-7b-alpha';
+  | 'mistral-7b';
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {

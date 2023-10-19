@@ -19,17 +19,17 @@ export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
   'gpt-3.5-turbo-16k',
   'llama-2-70b-chat',
-  'code-llama-34b-instruct',
-  'oasst-sft-6-llama-30b',
+  'llama-2-13b-chat',
+  'llama-2-7b-chat',
   'gpt-4',
   'gpt-4-32k',
   'claude-2',
   'claude-instant',
   'falcon-180b-chat',
-  'zephyr-7b-alpha',
+  'mistral-7b',
 ];
 
-export const defaultModel = 'gpt-3.5-turbo-16k';
+export const defaultModel = 'gpt-3.5-turbo';
 
 export const modelMaxToken = {
   'gpt-4': 8192,
@@ -37,17 +37,18 @@ export const modelMaxToken = {
   'gpt-3.5-turbo': 4097,
   'gpt-3.5-turbo-16k': 16384,
   'llama-2-70b-chat': 8192,
-  'oasst-sft-6-llama-30b': 8192,
-  'code-llama-34b-instruct': 8192,
+  'llama-2-13b-chat': 8192,
+  'llama-2-7b-chat': 8192,
+  'code-llama-34b': 8192,
   'claude-2': 100000,
   'claude-instant': 10000,
   'falcon-180b-chat': 2048,
-  'zephyr-7b-alpha': 8192,
+  'mistral-7b': 8192,
 };
 
 export const modelCost = {};
 
-export const defaultUserMaxToken = 16384;
+export const defaultUserMaxToken = 4097;
 
 export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,
