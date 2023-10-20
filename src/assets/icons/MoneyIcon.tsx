@@ -5,8 +5,8 @@ const MoneyIcon = (props: React.SVGProps<SVGSVGElement>) => {
     <svg
       viewBox='0 0 24 24'
       fill='currentColor'
-      height='1em'
-      width='1em'
+      height='1.3em'
+      width='1.3em'
       {...props}
     >
       <path fill='none' d='M0 0h24v24H0z' />

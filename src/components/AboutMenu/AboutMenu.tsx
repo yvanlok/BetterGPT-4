@@ -12,7 +12,7 @@ const AboutMenu = () => {
         <div>
           <AboutIcon />
         </div>
-        Sponsor
+        Sponsor / Donate
       </a>
     </>
   );
