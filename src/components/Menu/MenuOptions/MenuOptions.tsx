@@ -1,9 +1,9 @@
 import React from 'react';
 import useStore from '@store/store';
 
-import Api from './Api';
 import Me from './Me';
 import AboutMenu from '@components/AboutMenu';
+import Links from '@components/Links';
 import ImportExportChat from '@components/ImportExportChat';
 import SettingsMenu from '@components/SettingsMenu';
 import CollapseOptions from './CollapseOptions';
@@ -13,7 +13,6 @@ const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || undefined;
 
 const MenuOptions = () => {
   const hideMenuOptions = useStore((state) => state.hideMenuOptions);
-  const countTotalTokens = useStore((state) => state.countTotalTokens);
   return (
     <>
       <CollapseOptions />
@@ -23,6 +22,7 @@ const MenuOptions = () => {
         } overflow-hidden transition-all`}
       >
         {googleClientId && <GoogleSync clientId={googleClientId} />}
+        <Links />
         <AboutMenu />
         <ImportExportChat />
         <SettingsMenu />
