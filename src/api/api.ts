@@ -67,7 +67,7 @@ export const getChatCompletionStream = async (
       'Status Code: ' +
         (await response.status) +
         '\nError Message: ' +
-        responseText.error.message
+        responseText.error
     );
   }
 

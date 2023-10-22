@@ -23,8 +23,6 @@ function App() {
     });
   }, []);
 
-  console.log(user);
-
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
   const setTheme = useStore((state) => state.setTheme);
