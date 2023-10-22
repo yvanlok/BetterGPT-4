@@ -11,7 +11,7 @@ import { Theme } from '@type/theme';
 import Toast from '@components/Toast';
 
 import firebase from '@utils/firebase-auth';
-import { User } from 'firebase/auth'; // Import User type from Firebase Authentication`
+import { User } from 'firebase/auth';
 import Login from '@components/LoginMenu/LoginMenu';
 
 function App() {

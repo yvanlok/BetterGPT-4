@@ -1,6 +1,6 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
-
+import firebase from '@utils/firebase-auth';
 // Environment variables - remember to define in Vercel
 const endpoint =
   import.meta.env.VITE_OPENAI_BASE_URL ??
@@ -17,6 +17,7 @@ export const getChatCompletion = async (
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  headers.firebase_token = await getIdToken();
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -47,7 +48,7 @@ export const getChatCompletionStream = async (
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-
+  headers.firebase_token = await getIdToken();
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -87,4 +88,15 @@ export const submitShareGPT = async (body: ShareGPTSubmitBodyInterface) => {
   const { id } = response;
   const url = `https://shareg.pt/${id}`;
   window.open(url, '_blank');
+};
+
+const getIdToken = async () => {
+  const currentUser = firebase.auth().currentUser;
+
+  if (currentUser) {
+    const idToken = await currentUser.getIdToken(true);
+    return idToken;
+  } else {
+    return ''; // Return an empty string if currentUser is null
+  }
 };
