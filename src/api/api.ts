@@ -17,7 +17,6 @@ export const getChatCompletion = async (
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-  headers.firebase_token = await getIdToken();
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -28,6 +27,7 @@ export const getChatCompletion = async (
       ...config,
       model: config.model,
       max_tokens: undefined,
+      token: await getIdToken(),
     }),
     mode: 'cors',
   });
@@ -48,7 +48,7 @@ export const getChatCompletionStream = async (
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-  headers.firebase_token = await getIdToken();
+  headers.Token = await getIdToken();
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -56,6 +56,7 @@ export const getChatCompletionStream = async (
       messages,
       ...config,
       max_tokens: undefined,
+      token: await getIdToken(),
       stream: true,
     }),
     mode: 'cors',
