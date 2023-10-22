@@ -8,40 +8,9 @@
   "author": "Yvan Lokhmotov <contact@ylokh.xyz>",
   "description": "Play and chat smarter with BetterGPT-4 - an amazing open-source web app with a better UI and more AI models - all for free!",
   "scripts": {
-    "release": "electron-builder",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
-    "pack": "yarn build && electron-builder --dir",
-    "make": "yarn build && electron-builder"
-  },
-  "build": {
-    "appId": "better-gpt-4",
-    "productName": "BetterGPT-4",
-    "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
-    "directories": {
-      "output": "release"
-    },
-    "dmg": {
-      "title": "${productName} ${version}",
-      "icon": "dist/icon-rounded.png"
-    },
-    "mac": {
-      "icon": "dist/icon-rounded.png"
-    },
-    "linux": {
-      "target": [
-        "tar.gz",
-        "AppImage"
-      ],
-      "category": "Chat",
-      "icon": "dist/icon-rounded.png"
-    },
-    "win": {
-      "target": "NSIS",
-      "icon": "dist/icon-rounded.png"
-    }
+    "preview": "vite preview"
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
@@ -49,10 +18,6 @@
     "@firebase/auth": "^1.3.0",
     "@firebase/firestore": "^4.3.0",
     "@react-oauth/google": "^0.9.0",
-    "@types/typescript": "^2.0.0",
-    "electron-is-dev": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-updater": "^5.3.0",
     "firebase": "^10.5.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
@@ -85,8 +50,6 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "autoprefixer": "^10.4.13",
     "concurrently": "^8.0.1",
-    "electron": "^23.2.0",
-    "electron-builder": "^24.6.3",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.5",
