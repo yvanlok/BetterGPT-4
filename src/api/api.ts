@@ -48,7 +48,6 @@ export const getChatCompletionStream = async (
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-  headers.Token = await getIdToken();
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -68,7 +67,7 @@ export const getChatCompletionStream = async (
       'Status Code: ' +
         (await response.status) +
         '\nError Message: ' +
-        responseText.error
+        responseText.error.message
     );
   }
 

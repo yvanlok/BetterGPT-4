@@ -1,10 +1,17 @@
 import React from 'react';
-import { useAtBottom, useScrollToBottom } from 'react-scroll-to-bottom';
+import {
+  useAtBottom,
+  useScrollToBottom,
+  ScrollOption,
+} from 'react-scroll-to-bottom'; // Import ScrollOption
 
 import DownArrow from '@icon/DownArrow';
 
 const ScrollToBottomButton = React.memo(() => {
-  const scrollToBottom = useScrollToBottom();
+  const scrollToBottom = () => {
+    useScrollToBottom(); // Call useScrollToBottom with the appropriate ScrollOption if needed
+  };
+
   const [atBottom] = useAtBottom();
 
   return (
