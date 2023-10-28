@@ -25,6 +25,7 @@ export interface ConfigInterface {
   presence_penalty: number;
   top_p: number;
   frequency_penalty: number;
+  web_search: boolean;
 }
 
 export interface ChatHistoryInterface {

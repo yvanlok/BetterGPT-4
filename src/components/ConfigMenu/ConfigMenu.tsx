@@ -5,6 +5,7 @@ import PopupModal from '@components/PopupModal';
 import { ConfigInterface, ModelOptions } from '@type/chat';
 import DownChevronArrow from '@icon/DownChevronArrow';
 import { modelMaxToken, modelOptions } from '@constants/chat';
+import Toggle from '@components/Toggle'; // Import the Toggle component
 
 const ConfigMenu = ({
   setIsModalOpen,
@@ -15,6 +16,11 @@ const ConfigMenu = ({
   config: ConfigInterface;
   setConfig: (config: ConfigInterface) => void;
 }) => {
+  // Add a state variable for the web search toggle
+  const [_webSearchEnabled, _setWebSearchEnabled] = useState<boolean>(
+    config.web_search
+  );
+
   const [_maxToken, _setMaxToken] = useState<number>(config.max_tokens);
   const [_model, _setModel] = useState<ModelOptions>(config.model);
   const [_temperature, _setTemperature] = useState<number>(config.temperature);
@@ -35,6 +41,7 @@ const ConfigMenu = ({
       presence_penalty: _presencePenalty,
       top_p: _topP,
       frequency_penalty: _frequencyPenalty,
+      web_search: _webSearchEnabled,
     });
     setIsModalOpen(false);
   };
@@ -66,8 +73,45 @@ const ConfigMenu = ({
           _frequencyPenalty={_frequencyPenalty}
           _setFrequencyPenalty={_setFrequencyPenalty}
         />
+
+        <WebSearchToggle
+          label='Web Search'
+          isChecked={_webSearchEnabled}
+          setIsChecked={_setWebSearchEnabled}
+        />
       </div>
     </PopupModal>
+  );
+};
+export const WebSearchToggle = ({
+  label,
+  isChecked,
+  setIsChecked,
+}: {
+  label: string;
+  isChecked: boolean;
+  setIsChecked: (enabled: boolean) => void;
+}) => {
+  const toggleWebSearch = () => {
+    setIsChecked(!isChecked);
+  };
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <div className='mb-4'>
+        <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+          {label}: {isChecked ? 'Enabled' : 'Disabled'}
+        </label>
+      </div>
+
+      <div className='mb-4'>
+        <Toggle
+          label={label}
+          isChecked={isChecked}
+          setIsChecked={toggleWebSearch}
+        />
+      </div>
+    </div>
   );
 };
 

@@ -66,6 +66,9 @@ const ChatTitle = React.memo(() => {
         <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
           {t('frequencyPenalty.label')}: {config.frequency_penalty}
         </div>
+        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
+          Web Search: {config.web_search ? 'Enabled' : 'Disabled'}
+        </div>
       </div>
       {isModalOpen && (
         <ConfigMenu

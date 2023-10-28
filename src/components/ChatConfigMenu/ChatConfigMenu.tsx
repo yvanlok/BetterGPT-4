@@ -10,7 +10,10 @@ import {
   PresencePenaltySlider,
   TemperatureSlider,
   TopPSlider,
+  WebSearchToggle,
 } from '@components/ConfigMenu/ConfigMenu';
+
+import Toggle from '@components/Toggle'; // Import the Toggle component
 
 import { ModelOptions } from '@type/chat';
 import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
@@ -53,6 +56,11 @@ const ChatConfigPopup = ({
     config.frequency_penalty
   );
 
+  // Add a state variable for the web search toggle
+  const [_webSearchEnabled, _setWebSearchEnabled] = useState<boolean>(
+    config.web_search
+  );
+
   const { t } = useTranslation('model');
 
   const handleSave = () => {
@@ -63,6 +71,7 @@ const ChatConfigPopup = ({
       top_p: _topP,
       presence_penalty: _presencePenalty,
       frequency_penalty: _frequencyPenalty,
+      web_search: _webSearchEnabled, // Include web_search in the configuration
     });
     setDefaultSystemMessage(_systemMessage);
     setIsModalOpen(false);
@@ -76,6 +85,8 @@ const ChatConfigPopup = ({
     _setPresencePenalty(_defaultChatConfig.presence_penalty);
     _setFrequencyPenalty(_defaultChatConfig.frequency_penalty);
     _setSystemMessage(_defaultSystemMessage);
+    // Reset the web search toggle as well
+    _setWebSearchEnabled(_defaultChatConfig.web_search);
   };
 
   return (
@@ -108,12 +119,11 @@ const ChatConfigPopup = ({
           _frequencyPenalty={_frequencyPenalty}
           _setFrequencyPenalty={_setFrequencyPenalty}
         />
-        <div
-          className='btn btn-neutral cursor-pointer mt-5'
-          onClick={handleReset}
-        >
-          {t('resetToDefault')}
-        </div>
+        <WebSearchToggle
+          label='Web Search'
+          isChecked={_webSearchEnabled}
+          setIsChecked={_setWebSearchEnabled}
+        />
       </div>
     </PopupModal>
   );
