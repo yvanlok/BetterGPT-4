@@ -25,9 +25,11 @@ export const getChatCompletion = async (
     body: JSON.stringify({
       messages,
       ...config,
-      model: config.model,
+      model: 'gpt-4',
       max_tokens: undefined,
       token: await getIdToken(),
+      web_search: false,
+      stream: false,
     }),
     mode: 'cors',
   });

@@ -29,7 +29,7 @@ export const modelOptions: ModelOptions[] = [
   'mistral-7b',
 ];
 
-export const defaultModel = 'gpt-3.5-turbo';
+export const defaultModel = 'gpt-3.5-turbo-16k';
 
 export const modelMaxToken = {
   'gpt-4': 8192,
@@ -48,7 +48,7 @@ export const modelMaxToken = {
 
 export const modelCost = {};
 
-export const defaultUserMaxToken = 4097;
+export const defaultUserMaxToken = 16384;
 
 export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,
