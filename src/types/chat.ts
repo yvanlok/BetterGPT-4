@@ -50,19 +50,7 @@ export interface Folder {
   color?: string;
 }
 
-export type ModelOptions =
-  | 'gpt-4'
-  | 'gpt-4-32k'
-  | 'gpt-3.5-turbo'
-  | 'gpt-3.5-turbo-16k'
-  | 'llama-2-70b-chat'
-  | 'llama-2-13b-chat'
-  | 'llama-2-7b-chat'
-  | 'code-llama-34b'
-  | 'claude-2'
-  | 'claude-instant'
-  | 'falcon-180b-chat'
-  | 'mistral-7b';
+export type ModelOptions = string;
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {

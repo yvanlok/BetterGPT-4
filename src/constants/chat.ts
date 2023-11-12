@@ -2,49 +2,44 @@ import { v4 as uuidv4 } from 'uuid';
 import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
 import useStore from '@store/store';
 
-const date = new Date();
-const dateString =
-  date.getFullYear() +
-  '-' +
-  ('0' + (date.getMonth() + 1)).slice(-2) +
-  '-' +
-  ('0' + date.getDate()).slice(-2);
-
 export const _defaultSystemMessage =
   import.meta.env.VITE_DEFAULT_SYSTEM_MESSAGE ??
   `Carefully heed the user's instructions and follow the user's will to the best of your ability.
 Respond using Markdown.`;
 
-export const modelOptions: ModelOptions[] = [
-  'gpt-3.5-turbo',
-  'gpt-3.5-turbo-16k',
-  'llama-2-70b-chat',
-  'llama-2-13b-chat',
-  'llama-2-7b-chat',
-  'gpt-4',
-  'gpt-4-32k',
-  'claude-2',
-  'claude-instant',
-  'falcon-180b-chat',
-  'mistral-7b',
-];
-
 export const defaultModel = 'gpt-3.5-turbo-16k';
 
-export const modelMaxToken = {
-  'gpt-4': 8192,
-  'gpt-4-32k': 32768,
-  'gpt-3.5-turbo': 4097,
-  'gpt-3.5-turbo-16k': 16384,
-  'llama-2-70b-chat': 8192,
-  'llama-2-13b-chat': 8192,
-  'llama-2-7b-chat': 8192,
-  'code-llama-34b': 8192,
-  'claude-2': 100000,
-  'claude-instant': 10000,
-  'falcon-180b-chat': 2048,
-  'mistral-7b': 8192,
+export let modelOptions: ModelOptions[] = [];
+
+export let modelMaxToken: Record<string, number> = {};
+
+const fetchModels = async (): Promise<void> => {
+  const apiUrl = `${import.meta.env.VITE_OPENAI_BASE_URL}/v1/models`;
+
+  try {
+    const response = await fetch(apiUrl, { mode: 'cors' });
+    const data: { object: string; data: any[] } = await response.json();
+
+    if (data.object === 'list' && Array.isArray(data.data)) {
+      modelOptions = data.data
+        .filter((model) => model.type === 'chat')
+        .map((model) => model.id);
+
+      modelMaxToken = data.data.reduce((acc, model) => {
+        if (model.type === 'chat') {
+          acc[model.id] = model.tokens;
+        }
+        return acc;
+      }, {} as Record<string, number>);
+    } else {
+      console.error('Invalid API response format');
+    }
+  } catch (error) {
+    console.error('Error fetching models from the API', error);
+  }
 };
+
+fetchModels();
 
 export const modelCost = {};
 
