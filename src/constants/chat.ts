@@ -7,7 +7,7 @@ export const _defaultSystemMessage =
   `Carefully heed the user's instructions and follow the user's will to the best of your ability.
 Respond using Markdown.`;
 
-export const defaultModel = 'gpt-3.5-turbo-1106';
+export const defaultModel = 'gpt-3.5-turbo';
 
 export let modelOptions: ModelOptions[] = [];
 
@@ -21,12 +21,28 @@ const fetchModels = async (): Promise<void> => {
     const data: { object: string; data: any[] } = await response.json();
 
     if (data.object === 'list' && Array.isArray(data.data)) {
+      const excludedModels: string[] = [
+        'gpt-3.5-turbo-0301',
+        'pi',
+        'gpt-4-vision',
+        'gpt-3.5-vision',
+        'eleven-labs',
+        'text-moderation-006',
+        'chatgpt',
+      ];
+
       modelOptions = data.data
-        .filter((model) => model.tokens)
-        .map((model) => model.id);
+        .filter(
+          (model) =>
+            model.tokens &&
+            !excludedModels.includes(model.id) &&
+            !model.id.endsWith('-0613')
+        )
+        .map((model) => model.id)
+        .sort();
 
       modelMaxToken = data.data.reduce((acc, model) => {
-        if (model.tokens) {
+        if (model.tokens && !excludedModels.includes(model.id)) {
           acc[model.id] = model.tokens;
         }
         return acc;
