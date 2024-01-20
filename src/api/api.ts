@@ -67,13 +67,12 @@ export const getChatCompletionStream = async (
     let message = '';
     try {
       const parsedResponse = JSON.parse(responseText);
-      message = parsedResponse.error.message;
+      message = JSON.stringify(parsedResponse);
     } catch (error) {
       message = responseText;
     }
     throw new Error(message);
   }
-
   const stream = response.body;
   return stream;
 };
