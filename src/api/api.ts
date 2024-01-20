@@ -3,7 +3,7 @@ import { ConfigInterface, MessageInterface } from '@type/chat';
 import firebase from '@utils/firebase-auth';
 // Environment variables - remember to define in Vercel
 const endpoint =
-  `${import.meta.env.VITE_OPENAI_BASE_URL}/v1/chat/completions` ??
+  `${import.meta.env.VITE_OPENAI_BASE_URL}/chat/completions` ??
   'https://api.openai.com/v1/chat/completions';
 const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
@@ -33,7 +33,7 @@ export const getChatCompletion = async (
     mode: 'cors',
   });
   // Error handling (catch-all)
-  if (!response.ok) throw new Error(await response.text());
+  if (!response.ok) throw new Error(await response.json());
 
   const data = await response.json();
   return data;
@@ -63,13 +63,15 @@ export const getChatCompletionStream = async (
   });
 
   if (!response.ok) {
-    const responseText = JSON.parse(await response.text());
-    throw new Error(
-      'Status Code: ' +
-        (await response.status) +
-        '\nError Message: ' +
-        responseText.error.message
-    );
+    const responseText = await response.text();
+    let message = '';
+    try {
+      const parsedResponse = JSON.parse(responseText);
+      message = parsedResponse.error.message;
+    } catch (error) {
+      message = responseText;
+    }
+    throw new Error(message);
   }
 
   const stream = response.body;
