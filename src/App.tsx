@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import useStore from '@store/store';
 import i18n from './i18n';
 
@@ -10,17 +10,29 @@ import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
 import Toast from '@components/Toast';
 
-import firebase from '@utils/firebase-auth';
-import { User } from 'firebase/auth';
-import Login from '@components/LoginMenu/LoginMenu';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '@utils/supabaseClient';
+
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const client = supabase;
+
+  const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((newUser) => {
-      setUser(newUser as User | null);
+    client.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
     });
+
+    const {
+      data: { subscription },
+    } = client.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const initialiseNewChat = useInitialiseNewChat();
@@ -80,7 +92,7 @@ function App() {
 
   return (
     <>
-      {user ? (
+      {session ? (
         <div className='overflow-hidden w-full h-full relative flex justify-center items-center'>
           <Menu />
           <Chat />
@@ -91,7 +103,13 @@ function App() {
           className='overflow-hidden w-full h-full relative flex justify-center items-center'
           style={{ backgroundColor: '#343541' }}
         >
-          <Login />
+          <div className='w-1/5 text-white'>
+            <Auth
+              supabaseClient={client}
+              appearance={{ theme: ThemeSupa }}
+              providers={['google', 'github']}
+            />
+          </div>
         </div>
       )}
     </>

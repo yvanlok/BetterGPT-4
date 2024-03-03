@@ -1,12 +1,12 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
-import firebase from '@utils/firebase-auth';
+import { supabase } from '@utils/supabaseClient';
 // Environment variables - remember to define in Vercel
 const endpoint =
   `${import.meta.env.VITE_OPENAI_BASE_URL}/chat/completions` ??
   'https://api.openai.com/v1/chat/completions';
 const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-
+const client = supabase;
 export const getChatCompletion = async (
   messages: MessageInterface[],
   config: ConfigInterface,
@@ -93,12 +93,13 @@ export const submitShareGPT = async (body: ShareGPTSubmitBodyInterface) => {
 };
 
 const getIdToken = async () => {
-  const currentUser = firebase.auth().currentUser;
+  const session = await client.auth.getSession();
 
-  if (currentUser) {
-    const idToken = await currentUser.getIdToken(true);
-    return idToken;
-  } else {
-    return ''; // Return an empty string if currentUser is null
+  if (session?.data?.session) {
+    const token = session.data.session.access_token;
+    return token;
   }
+
+  console.error('Invalid session.');
+  return '';
 };
