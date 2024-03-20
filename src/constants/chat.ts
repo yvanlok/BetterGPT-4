@@ -22,7 +22,7 @@ const fetchModels = async (): Promise<void> => {
 
     if (data.object === 'list' && Array.isArray(data.data)) {
       modelOptions = data.data
-        .filter((model) => model.tokens)
+        .filter((model) => model.tokens && model.id)
         .map((model) => model.id)
         .sort();
 
