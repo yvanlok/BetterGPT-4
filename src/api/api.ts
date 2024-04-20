@@ -3,7 +3,7 @@ import { ConfigInterface, MessageInterface } from '@type/chat';
 import { supabase } from '@utils/supabaseClient';
 // Environment variables - remember to define in Vercel
 const endpoint =
-  `${import.meta.env.VITE_OPENAI_BASE_URL}/chat/completions` ??
+  `${import.meta.env.VITE_OPENAI_BASE_URL}/v1/chat/completions` ??
   'https://api.openai.com/v1/chat/completions';
 const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 const client = supabase;
