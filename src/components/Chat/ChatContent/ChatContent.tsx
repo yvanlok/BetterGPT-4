@@ -9,7 +9,7 @@ import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
-import DownloadChat from './DownloadChat';
+import ViewStats from './ViewStats';
 import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
 
@@ -63,18 +63,21 @@ const ChatContent = () => {
             {!generating && advancedMode && messages?.length === 0 && (
               <NewMessageButton messageIndex={-1} />
             )}
-            {messages?.map((message, index) => (
-              (advancedMode || index !== 0 || message.role !== 'system') && (
-                <React.Fragment key={index}>
-                  <Message
-                    role={message.role}
-                    content={message.content}
-                    messageIndex={index}
-                  />
-                  {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
-                </React.Fragment>
-              )
-            ))}
+            {messages?.map(
+              (message, index) =>
+                (advancedMode || index !== 0 || message.role !== 'system') && (
+                  <React.Fragment key={index}>
+                    <Message
+                      role={message.role}
+                      content={message.content}
+                      messageIndex={index}
+                    />
+                    {!generating && advancedMode && (
+                      <NewMessageButton messageIndex={index} />
+                    )}
+                  </React.Fragment>
+                )
+            )}
           </div>
 
           <Message
@@ -107,7 +110,7 @@ const ChatContent = () => {
           >
             {useStore.getState().generating || (
               <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
-                <DownloadChat saveRef={saveRef} />
+                <ViewStats />
                 <ShareGPT />
                 <CloneChat />
               </div>

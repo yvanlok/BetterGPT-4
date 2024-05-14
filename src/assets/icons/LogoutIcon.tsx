@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogoutIcon = () => {
+const LogoutIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       stroke='currentColor'
@@ -9,7 +9,7 @@ const LogoutIcon = () => {
       viewBox='0 0 24 24'
       strokeLinecap='round'
       strokeLinejoin='round'
-      className='h-3.5 w-3.5'
+      className='h-4 w-4 mt-0.5 '
       height='1em'
       width='1em'
       xmlns='http://www.w3.org/2000/svg'

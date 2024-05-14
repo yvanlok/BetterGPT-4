@@ -19,6 +19,7 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/supabase-js": "^2.39.7",
     "core-js": "^3.33.1",
+    "date-fns": "^3.6.0",
     "firebase": "^10.5.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
