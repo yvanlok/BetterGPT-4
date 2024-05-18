@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-    <a href="https://chat.ylokh.xyz">Enter Website</a>
+    <a href="https://chat.ylokhmotov.dev">Enter Website</a>
     ·
     <a href="https://github.com/yvanlok/BetterGPT-4/issues/new/choose">Report Bug</a>
     ·
@@ -37,7 +37,7 @@
 ## 👋🏻 Introducing Better GPT
 
 <p align="center">
-    <a href="https://chat.ylokh.xyz" target="_blank">
+    <a href="https://chat.ylokhmotov.dev" target="_blank">
         <img src="assets/preview.png" alt="landing" width=500 />
     </a>
 </p>
@@ -70,7 +70,7 @@ BetterGPT-4 comes with a bundle of amazing features! Here are some of them:
 
 # 🛠️ Usage
 
-To get started, simply visit our website at <https://chat.ylokh.xyz/>!
+To get started, simply visit our website at <https://chat.ylokhmotov.dev/>!
 
 
 # ⭐️ Star History
